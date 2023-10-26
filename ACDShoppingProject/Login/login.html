@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login for ACD</title>
+	<link rel="stylesheet" href="loginstyle.css">
+	<link rel="icon" href="https://aircraftcomponentdesign.com/wp-content/uploads/2020/11/acd_logo_new.png">
+</head>
+
+<body>
+
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+		<div class="signup">
+			<label for="chk" aria-hidden="true">Sign up</label>
+			<input type="text" placeholder="Username" required id="username" />
+			<input type="email" placeholder="Email" required id="email" />
+			<input type="password" placeholder="Password" required id="password" />
+			<button id="register">Sign Up</button>
+
+
+
+		</div>
+
+
+
+		<div class="login">
+
+			<label for="chk" aria-hidden="true">Login</label>
+			<input type="email" id="email" name="email" placeholder="Email" required>
+			<input type="password" id="password" name="pswd" placeholder="Password" required>
+			<button id="login">Login</button>
+			<button id="googleauth">Google Signin</button>
+
+		</div>
+	</div>
+</body>
+
+
+
+
+<script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+	//import { GoogleAuthProvider, signInWithRedirect, getRedirectResult, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+	import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+	import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	const firebaseConfig = {
+		apiKey: "AIzaSyCSOsAdb5KlBTWg8OaI-kb3Np_apubBzBs",
+		authDomain: "clone-7e368.firebaseapp.com",
+		databaseURL: "https://clone-7e368-default-rtdb.firebaseio.com",
+		projectId: "clone-7e368",
+		storageBucket: "clone-7e368.appspot.com",
+		messagingSenderId: "156834042204",
+		appId: "1:156834042204:web:c8a9d2fdc2f90cf488b199",
+		measurementId: "G-6TVDW34K96"
+	};
+
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+	const provider = new GoogleAuthProvider(app);
+	const analytics = getAnalytics(app);
+	const auth = getAuth();
+	console.log(app);
+
+
+
+	//----- New Registration code start	  
+	document.getElementById("register").addEventListener("click", function () {
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("password").value;
+		//For new registration
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				// Signed in 
+				const user = userCredential.user;
+				console.log(user);
+				alert("Registration successfully!!");
+				// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// ..
+				console.log(errorMessage);
+				alert(error);
+			});
+	});
+	//----- End
+
+
+
+
+	//----- Login code start	  
+
+	login.addEventListener("click", function () {
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("password").value;
+
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				// Signed in 
+				const user = userCredential.user;
+				console.log(user);
+				alert(user.email + " Login successfully!!!");
+				document.getElementById('logout');
+				Redirect();
+				// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorMessage);
+				alert(errorMessage);
+			});
+
+	})
+
+	//----- End
+
+
+
+	function Redirect() {
+		window.location = "/index.html";
+	}
+
+
+
+	googleauth.addEventListener("click", function () {
+
+
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				// This gives you a Google Access Token. You can use it to access the Google API.
+				const credential = GoogleAuthProvider.credentialFromResult(result);
+				const token = credential.accessToken;
+				// The signed-in user info.
+				const user = result.user;
+				alert("User login")
+				Redirect();
+				// ...
+			}).catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// The email of the user's account used.
+				const email = error.customData.email;
+				// The AuthCredential type that was used.
+				const credential = GoogleAuthProvider.credentialFromError(error);
+				alert()
+				// ...
+			});
+
+
+	})
+</script>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css"> -->
+</head>
+
+<body class=" text-gray-900 bg-gradient-to-r from-purple-500 to-pink-500 text-3xl w-auto h-auto m-auto font-serif">
+    <div class="text-6xl m-auto flex justify-center font-extrabold  ">
+        <p>Add Product to the site.</p>
+    </div>
+    <div class="main m-auto w-96 flex flex-col justify-center">
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Name</label>
+            <input id="Namebox" type="text"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  "
+                placeholder="Name of the Product" required>
+        </div>
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Image</label>
+            <input id="Imagebox" type="text" placeholder="Image link"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3  ">
+            <label class="text-black mt-2 font-semibold ">Company</label>
+            <input id="Makebox" type="text" placeholder="Company Name"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Price</label>
+            <input id="Pricebox" type="text" placeholder="Price"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Rating</label>
+            <input id="Ratingbox" type="text" placeholder="Rating"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ] ">
+            <label class="text-black mt-2 font-semibold ">Categories </label>
+            <select id="Categorybox" class=" w-full  " required>
+                <option value="mobile">Mobile</option>
+                <option value="books">book</option>
+                <option value="electronics">electronics</option>
+                <option value="home">home</option>
+                <option value="fashion">fashion</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="buttons flex justify-center space-x-10 ">
+        <button
+            class=" bg-green-500 w-40 h-16 p-3  hover:bg-green-700 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Insbtn">INSERT</button>
+        <button
+            class="bg-yellow-400 w-40 h-16 p-3  hover:bg-yellow-500 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Selbtn">SELECT</button>
+        <button
+            class="bg-cyan-400 w-40 h-16 p-3  hover:bg-cyan-500 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Updbtn">UPDATE</button>
+
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSOsAdb5KlBTWg8OaI-kb3Np_apubBzBs",
+            authDomain: "clone-7e368.firebaseapp.com",
+            databaseURL: "https://clone-7e368-default-rtdb.firebaseio.com",
+            projectId: "clone-7e368",
+            storageBucket: "clone-7e368.appspot.com",
+            messagingSenderId: "156834042204",
+            appId: "1:156834042204:web:4717c05711d9747a88b199",
+            measurementId: "G-VF48NF5E0E"
+        };
+
+        // Initialize Firebase
+
+
+
+        import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getFirestore(app);
+
+        let NameBox = document.getElementById("Namebox");
+        let MakeBox = document.getElementById("Makebox");
+        let PriceBox = document.getElementById("Pricebox");
+        let RatingBox = document.getElementById("Ratingbox");
+        let ImageBox = document.getElementById("Imagebox");
+        let CategoryBox = document.getElementById("Categorybox");
+
+
+        let insBtn = document.getElementById("Insbtn")
+        let selBtn = document.getElementById("Selbtn")
+        let updBtn = document.getElementById("Updbtn")
+        let delBtn = document.getElementById("Delbtn")
+
+        // Adding Document
+
+        async function AddDocument_CustomID() {
+
+            const docRef = await addDoc(collection(db, "items"), {
+                name: NameBox.value,
+                make: MakeBox.value,
+                image: ImageBox.value,
+                price: PriceBox.value,
+                rating: RatingBox.value,
+                category: CategoryBox.value
+            })
+
+                .then(() => {
+                    alert("Data Added Successfully");
+                })
+                .catch((error) => {
+                    alert("Unsuccessful" + error);
+                });
+        }
+
+    //     let items=[];
+    //     // Select Event
+    //     async function GetADocument() {
+    //         const querySnapshot = await getDocs(collection(db, "items"));
+
+    //         querySnapshot.forEach((doc) => {
+    //             items.push({
+    //                 id: doc.id,
+    //                 image: doc.data().image,
+    //                 name: doc.data().name,
+    //                 make: doc.data().make,
+    //                 rating: doc.data().rating,
+    //                 price: doc.data().price
+
+    //             });
+    //         });
+    //         ShowDocument(items);
+    //     }
+    //  console.log(items);
+   
+    //     // Update Data
+    //     function ShowDocument(items) {
+    //         let itemsHTML = "";
+           
+    //         items.forEach((items) => {
+    //             let doc = document.createElement("div");
+    //             doc.classList.add("main-product", "mr-5", "mb-5");
+    //             doc.innerHTML = `
+    //         <div class="product-image w-48 h-52  bg-white rounded-lg p-4">
+    //             <img class="w-full h-full object-contain " src="${items.image}">
+    //         </div>
+    //         <div class="product-name text-gray-700 flex justify-center font-bold mt-2 text-sm">
+    //             ${items.name}
+    //         </div>
+    //         <div class="product-make justify-center flex text-green-700 font-bold">
+    //             ${items.make}
+    //         </div>
+    //         <div class="product-rating text-yellow-300 flex justify-center font-bold my-1">
+    //         ⭐⭐⭐⭐⭐ ${items.rating}
+    //         </div>
+    //         <div class="product-price font-bold flex justify-center text-gray-700 text-lg">
+    //             ${items.price}
+        
+    //         </div>
+    //     `
+    //         })}
+           
+        
+
+
+
+    //     // Assign Buttons to Events
+
+        insBtn.addEventListener("click", AddDocument_CustomID);
+        // selBtn.addEventListener("click", GetADocument);
+        // updBtn.addEventListener("click", ShowDocument);
+        // delBtn.addEventListener("click", DeleteDocument);
+    </script>
+</body>
+
+</html>

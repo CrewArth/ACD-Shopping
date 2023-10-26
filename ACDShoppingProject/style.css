@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.main-section-banner {
+    background-image: url("images/banner.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.buttonlog{
+    background-color: #baff39;
+    color: black;
+    
+}
+.buttonlog:hover{
+    
+    /* background-color: #a6f01c; */
+    outline-style: solid;
+    outline-color: white;
+    background-color: #a1f00f;
+}
+
+.search-icon{
+    color: black;
+    background-color: #baff39;
+
+}
+.search-icon:hover{
+    outline-style: solid;
+    outline-color: white;
+    background-color: #a1f00f;
+}
+.cart-icon{
+    
+    background-color: #baff39;
+    
+}
+
+.cart-icon:hover{
+    background-color: #a1f00f ;
+    outline-color: white;
+    outline-style: solid;
+}
+
+.cart-item-number{
+    background-color: black;
+}
+.cartto_js{
+    color: black;
+    background-color: #baff39;
+    
+}
+
+.cartto_js:hover{
+    background-color: #a1f00f ;
+    outline-color: black;
+    outline-style: solid;
+}
+
+.complete-order-button{
+    color: black;
+    background-color: #baff39;
+    font-weight: bold;
+}
+
+.complete-order-button:hover{
+    background-color: #a1f00f ;
+    outline-color: black;
+    outline-style: solid;
+    
+}
+
+.logo:hover{
+    outline-color: white;
+    outline-style: solid;
+}
+.categories{
+    color: #baff39;
+    align-items: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+

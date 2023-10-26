@@ -1,0 +1,26 @@
+{
+  "name": "acd-project",
+  "version": "1.0.0",
+  "description": "This is Project",
+  "main": "cart.js",
+  "scripts": {
+    "start": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RENGOKU03/ACD-PROJECT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RENGOKU03/ACD-PROJECT/issues"
+  },
+  "homepage": "https://github.com/RENGOKU03/ACD-PROJECT#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.0.4"
+  }
+}

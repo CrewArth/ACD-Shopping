@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css"> -->
+</head>
+
+<body class=" text-gray-900 bg-gradient-to-r from-purple-500 to-pink-500 text-3xl w-auto h-auto m-auto font-serif">
+    <div class="text-6xl m-auto flex justify-center font-extrabold  ">
+        <p>Add Product to the site.</p>
+    </div>
+    <div class="main m-auto w-96 flex flex-col justify-center">
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Name</label>
+            <input id="Namebox" type="text"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  "
+                placeholder="Name of the Product" required>
+        </div>
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Image</label>
+            <input id="Imagebox" type="text" placeholder="Image link"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3  ">
+            <label class="text-black mt-2 font-semibold ">Company</label>
+            <input id="Makebox" type="text" placeholder="Company Name"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Price</label>
+            <input id="Pricebox" type="text" placeholder="Price"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3 ">
+            <label class="text-black mt-2 font-semibold ">Rating</label>
+            <input id="Ratingbox" type="text" placeholder="Rating"
+                class="rounded-2xl h-14 pl-4 placeholder:py-2 py-1 outline-none caret-slate-700  " required>
+        </div>
+
+
+        <div class="flex justify-center mt-6 pt-6 mb-2 p-2 space-x-3  ">
+            <label class="text-black mt-2 font-semibold ">Categories </label>
+            <select id="Categorybox" class=" h-12 bg-white border w-9 " required>
+                <option class="" value="Mobile">Mobile</option>
+                <option value="Books">Books</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Home">Home</option>
+                <option value="Fashion">Fashion</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="buttons flex justify-center space-x-10 ">
+        <button
+            class=" bg-green-500 w-40 h-16 p-3  hover:bg-green-700 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Insbtn">INSERT</button>
+        <button
+            class="bg-yellow-400 w-40 h-16 p-3  hover:bg-yellow-500 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Selbtn">SELECT</button>
+        <button
+            class="bg-cyan-400 w-40 h-16 p-3  hover:bg-cyan-500 hover:outline hover:outline-white rounded-3xl text-3xl font-bold text-white font-sans shadow-sm mt-16 align-middle justify-center flex px-1 animate-bounce"
+            id="Updbtn">UPDATE</button>
+
+    </div>
+
+
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getFirestore } from "firebase/firestore";// TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSOsAdb5KlBTWg8OaI-kb3Np_apubBzBs",
+            authDomain: "clone-7e368.firebaseapp.com",
+            databaseURL: "https://clone-7e368-default-rtdb.firebaseio.com",
+            projectId: "clone-7e368",
+            storageBucket: "clone-7e368.appspot.com",
+            messagingSenderId: "156834042204",
+            appId: "1:156834042204:web:4717c05711d9747a88b199",
+            measurementId: "G-VF48NF5E0E"
+        };
+
+        // Initialize Firebase
+        const db = getFirestore(app);
+
+
+        import { collection, addDoc } from "/firebase/firestore";
+
+
+
+        let NameBox = document.getElementById("Namebox");
+        let MakeBox = document.getElementById("Makebox");
+        let PriceBox = document.getElementById("Pricebox");
+        let RatingBox = document.getElementById("Ratingbox");
+        let ImageBox = document.getElementById("Imagebox");
+        let CategoryBox = document.getElementById("Categorybox");
+
+
+        let insBtn = document.getElementById("Insbtn")
+        let selBtn = document.getElementById("Selbtn")
+        let updBtn = document.getElementById("Updbtn")
+        let delBtn = document.getElementById("Delbtn")
+
+        // Adding Document
+
+        async function AddDocument_CustomID() {
+
+            const docRef = await addDoc(collection(db, "users"), {
+                first: "Ada",
+                last: "Lovelace",
+                born: 1815
+            });
+        }
+
+
+        // Select Event
+        async function GetADocument() {
+
+        }
+
+        // Update Data
+        async function UpdateDocumentsFiled() {
+
+        }
+
+
+
+
+
+        // Assign Buttons to Events
+
+        insBtn.addEventListener("click", AddDocument_CustomID);
+        selBtn.addEventListener("click", GetADocument);
+        updBtn.addEventListener("click", UpdateDocumentsFiled);
+        // delBtn.addEventListener("click", DeleteDocument);
+    </script>
+</body>
+
+</html>
